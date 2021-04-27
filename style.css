@@ -1,0 +1,105 @@
+body {
+  color: white;
+  height: 100%;
+  background-image: url("https://cdna.artstation.com/p/assets/images/images/027/169/560/large/rainer-cs-1211-kimetsu-no-yaiba.jpg?1590773728");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+}
+
+.header {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: none;
+  filter: drop-shadow(0px -10px 30px rgb(255, 255, 255));
+}
+
+.footer {
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: smaller;
+  text-align: center;
+}
+
+#main-body {
+  margin: 0 auto;
+  width: 70%;
+  height: 600px;
+  outline: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: auto;
+}
+/* need to code for min-width so that it doesn't become smaller than a certain width */
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+  outline: 0.5px solid white;
+  outline-offset: -5px;
+}
+
+.gameUI img {
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
+}
+
+.gameUI button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  font-family: "MS Gothic", "MS PGothic";
+}
+
+.chapterDiv {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  text-align: justify;
+  padding: 50px 50px 0px 50px;
+}
+
+.input-group {
+  margin: 0px 50px 50px 50px;
+  width: 350px;
+}
+
+.input-group-text {
+  font-size: 12px;
+}
+
+.form-control {
+  font-size: 12px;
+}
+
+#gameOverDiv {
+  margin: 0 auto;
+  padding-top: 50px;
+  font-size: 43px;
+  text-align: center;
+}
+
+#gameOverDiv img {
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+  max-height: 200px;
+  width: auto;
+}
