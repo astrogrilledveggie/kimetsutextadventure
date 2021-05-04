@@ -53,6 +53,10 @@ body {
   outline-offset: -5px;
 }
 
+::-webkit-scrollbar-corner {
+  background: black;
+}
+
 .gameUI img {
   display: block;
   margin-top: 50px;
@@ -80,7 +84,7 @@ body {
 
 .input-group {
   margin: 0px 50px 50px 50px;
-  width: 350px;
+  width: auto;
 }
 
 .input-group-text {
@@ -102,4 +106,14 @@ body {
   filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
   max-height: 200px;
   width: auto;
+}
+
+#statusCheckText {
+  font-size: 15px;
+  font-weight: bolder;
+  color: red;
+}
+
+#choiceList {
+  font-size: 13px;
 }

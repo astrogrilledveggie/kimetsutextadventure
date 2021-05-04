@@ -10,7 +10,12 @@ At every round, you will be presented with 3 options - only 1 is the right optio
 
 "Game clear" when you overcome all challenges to reach your destination!
 
-- background changes with the choices made
-- background music can also change with the options
-- animation to match storyline
+- background IMG/BGM changes with the choices made
 - store game progress
+- jump view to new Chapter
+- load story with scroll
+- build modals for nicer pop-ups
+- append the options taken as part of the story
+- alert when hp is low
+- prompts for why the decision led to gameOver
+- prevent inputs to earlier chapters once the chapter has been cleared
