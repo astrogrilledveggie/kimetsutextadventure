@@ -16,7 +16,7 @@ Stretch Goals:
 - store game progress
 - ~[DONE] jump view to new Chapter~
 - load story with scroll
-- ~[DONE] build modals for nicer pop-ups~
+- ~[BUGGED] build modals for nicer pop-ups~
 - append the options taken as part of the story
 - alert when hp is low
 - ~[DONE] prompts for why the decision led to gameOver~
@@ -24,8 +24,14 @@ Stretch Goals:
 
 TA Comments:
 
-- ~[DONE] set HP counter in a separate div on the page~
+- ~[BUGGED] set HP counter in a separate div on the page~
 - ~[DONE] set gameUI in a fixed width (so that it doesn't expand over that limit)~
-- ~[DONE] modals: use bootstrap modals (easier)~
+- ~[BUGGED] modals: use bootstrap modals (easier)~
 - soundover for good/bad/terrible options
 - music can change according to the hps
+
+Problems faced:
+
+- Modals did not work
+- lifebar visibility affected scrollintoview
+- for loop for lifebar did not work beyond first chapter
