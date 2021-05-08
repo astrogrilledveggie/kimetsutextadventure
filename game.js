@@ -4,6 +4,8 @@ let tanjiroHitPoints = 10
 
 // admin code bits
 let mainBody = document.getElementById('main-body')
+let lifeBar = document.getElementById('life-bar')
+let lifeHearts = document.querySelectorAll(".lifeHeart")
 let gameUI = document.createElement('div')
 let startGameImg = document.createElement('img')
 let startGameBtn = document.createElement('button')
@@ -12,6 +14,7 @@ let gameTitle = document.getElementById('title').textContent
 
 // "Game Over" visuals
 function gameOverTrue(parent) {
+    lifeBar.remove()
     let gameOverDiv = document.createElement('div')
     gameOverDiv.id = 'gameOverDiv'
     gameOverDiv.innerHTML = 'GAME OVER' + "<p>" + '残念だけど'
@@ -20,6 +23,29 @@ function gameOverTrue(parent) {
     gameOverDiv.appendChild(gameOverImg)
     parent.appendChild(gameOverDiv)
 }
+
+// "To Be Continued" visuals
+function toBeContinued(parent) {
+    let toBeContinuedDiv = document.createElement('div')
+    toBeContinuedDiv.id = 'toBeContinued'
+    toBeContinuedDiv.innerHTML = 'Thanks for playing!' + "<p>" + 'またね〜'
+    let toBeContinuedImg = document.createElement('img')
+    toBeContinuedImg.src = 'https://pbs.twimg.com/media/D4CpsAfU4AEDPQ8.jpg'
+    toBeContinuedDiv.appendChild(toBeContinuedImg)
+    parent.appendChild(toBeContinuedDiv)
+}
+
+// build game modals
+// let goodChoiceModal = document.getElementById('goodChoiceModal')
+// let goodChoiceModalBody = document.getElementById('goodChoiceModalBody')
+// let mehChoiceModal = document.getElementById('mehChoiceModal')
+// let mehChoiceModalBody = document.getElementById('mehChoiceModalBody')
+// let badChoiceModal = document.getElementById('badChoiceModal')
+// let badChoiceModalBody = document.getElementById('badChoiceModalBody')
+// let sitOnFenceModal = document.getElementById('sitOnFenceModal')
+// let sitOnFenceModalBody = document.getElementById('sitOnFenceModalBody')
+// let invalidModal = document.getElementById('invalidModal')
+// let invalidModalBody = document.getElementById('invalidModalBody')
 
 let createTextInput0 = (parent) => {
     let textDiv0 = document.createElement('div')
@@ -37,6 +63,7 @@ let createTextInput0 = (parent) => {
     let textInput0Field = document.createElement('input')
     textInput0Field.type = 'text'
     textInput0Field.className = 'form-control'
+    textInput0Field.id = 'input0'
     textDiv0.appendChild(textInput0Field)
 
     parent.appendChild(textDiv0)
@@ -46,17 +73,20 @@ let createTextInput0 = (parent) => {
     function enterChapter1(event) {
         event.stopPropagation()
         if (event.key === 'Enter' && textInput0Field.value === 'let us proceed') {
-            alert('Nicely done. You are ready to embark on your text adventure.')
+            // alert('Nicely done. You are ready to embark on your text adventure.')
             document.getElementById('prologue').remove()
             document.querySelector('.input-group').remove()
             loadChapter1()
         } else if (event.key === 'Enter' && textInput0Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
+            // sitOnFenceModalBody.innerText = "You need to make a choice. Be brave, young warrior."
+            // sitOnFenceModal.modal()
             return
         } else if (event.key !== 'Enter') {
             return
         } else {
             alert('That is incorrect. Please try again')
+            // invalidModal.modal()
         }
     }
 }
@@ -81,6 +111,12 @@ window.onload = function() {
 
 function startGameBtnClick(event) {
     event.stopPropagation()
+
+    // lifeBar.style.display = 'block'
+
+    let audio = new Audio("Beginning.mp3")
+    audio.play()
+
     $(startGameImg).hide('slow')
     $(startGameBtn).hide('slow')
 
@@ -138,6 +174,7 @@ function createTextInput1(parent) {
     let textInput1Field = document.createElement('input')
     textInput1Field.type = 'text'
     textInput1Field.className = 'form-control'
+    textInput1Field.id = 'input1'
     textDiv1.appendChild(textInput1Field)
 
     parent.appendChild(textDiv1)
@@ -150,12 +187,20 @@ function createTextInput1(parent) {
             alert('Nicely done. The siblings return home to bury the rest of the Kamado family, and leave hand in hand to embark on their journey.')
             loadChapter2()
         } else if (event.key === 'Enter' && textInput1Field.value === 'Kill Nezuko') {
+            alert('Nezuko is the heart and soul of this adventure. You just destroyed your fate.')
             gameOver = true
             gameUI.remove()
             gameOverTrue(mainBody)
         } else if (event.key === 'Enter' && textInput1Field.value === 'Search for Giyu') {
             alert('Giyu vanished like the wind. It is not advisable to try to locate him and risk running into another demon attack. What would be a priority for you at this point?')
             tanjiroHitPoints = tanjiroHitPoints - 2
+            // for (let i = 0; i < lifeHearts.length; i++) {
+            //     lifeHearts[i].remove()
+            //     lifeHearts[i+1].remove()
+            //     break
+            // }
+            document.getElementById("heart0").remove()
+            document.getElementById("heart1").remove()
         } else if (event.key === 'Enter' && textInput1Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
         } else if (event.key !== 'Enter') {
@@ -191,8 +236,11 @@ function loadChapter2() {
         + "<li>" + "Go back the way you came: " + "<font color = 'yellow'>" + "Backtrack" + "</font>"
         + "</ol>"
     gameUI.appendChild(chapter2Div)
+    chapter2Div.scrollIntoView()
 
     createTextInput2(gameUI)
+
+    document.getElementById('input1').disabled = true
 }
 
 function createTextInput2(parent) {
@@ -211,6 +259,7 @@ function createTextInput2(parent) {
     let textInput2Field = document.createElement('input')
     textInput2Field.type = 'text'
     textInput2Field.className = 'form-control'
+    textInput2Field.id = 'input2'
     textDiv2.appendChild(textInput2Field)
 
     parent.appendChild(textDiv2)
@@ -223,12 +272,15 @@ function createTextInput2(parent) {
             alert('Nicely done. Tanjiro uses his sense of smell to find the booby traps, which still have the scent of the person who laid them, letting him return in time. Urokodaki recalls the letter he recieved from Giyu about the siblings and the latter requests he trains them. He accepts Tanjiro as his student.')
             loadChapter3()
         } else if (event.key === 'Enter' && textInput2Field.value === 'Backtrack') {
+            alert('You stumble over the whole obstacle course and are fatally injured.')
             gameOver = true
             gameUI.remove()
             gameOverTrue(mainBody)
         } else if (event.key === 'Enter' && textInput2Field.value === 'Persevere onwards') {
             alert('Not the smartest way to go, but you completed the task anyway - only that you did not make it within the timeframe given by Urokodaki. Try again.')
             tanjiroHitPoints = tanjiroHitPoints - 2
+            document.getElementById("heart2").remove()
+            document.getElementById("heart3").remove()
         } else if (event.key === 'Enter' && textInput2Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
         } else if (event.key !== 'Enter') {
@@ -265,8 +317,11 @@ function loadChapter3() {
         + "<li>" + "Just keep trying everyday, without fail: " + "<font color = 'yellow'>" + "Train train train" + "</font>"
         + "</ol>"
     gameUI.appendChild(chapter3Div)
+    chapter3Div.scrollIntoView()
 
     createTextInput3(gameUI)
+
+    document.getElementById('input2').disabled = true
 }
 
 function createTextInput3(parent) {
@@ -285,6 +340,7 @@ function createTextInput3(parent) {
     let textInput3Field = document.createElement('input')
     textInput3Field.type = 'text'
     textInput3Field.className = 'form-control'
+    textInput3Field.id = 'input3'
     textDiv3.appendChild(textInput3Field)
 
     parent.appendChild(textDiv3)
@@ -304,6 +360,8 @@ function createTextInput3(parent) {
         } else if (event.key === 'Enter' && textInput3Field.value === 'Pester Urokodaki') {
             alert('Urokodaki did not appreciate that - he acts for a reason, and the onus is on you to understand it. Try again.')
             tanjiroHitPoints = tanjiroHitPoints - 2
+            document.getElementById("heart4").remove()
+            document.getElementById("heart5").remove()
         } else if (event.key === 'Enter' && textInput3Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
         } else if (event.key !== 'Enter') {
@@ -340,8 +398,11 @@ function loadChapter4() {
         + "<li>" + "Try to elude the demon by hiding and running where possible: " + "<font color = 'yellow'>" + "Be elusive" + "</font>"
         + "</ol>"
     gameUI.appendChild(chapter4Div)
+    chapter4Div.scrollIntoView()
 
     createTextInput4(gameUI)
+
+    document.getElementById('input3').disabled = true
 }
 
 function createTextInput4(parent) {
@@ -360,6 +421,7 @@ function createTextInput4(parent) {
     let textInput4Field = document.createElement('input')
     textInput4Field.type = 'text'
     textInput4Field.className = 'form-control'
+    textInput4Field.id = 'input4'
     textDiv4.appendChild(textInput4Field)
 
     parent.appendChild(textDiv4)
@@ -379,6 +441,8 @@ function createTextInput4(parent) {
         } else if (event.key === 'Enter' && textInput4Field.value === 'Be elusive') {
             alert("That works too, as long as it ensures your survival. But this demon is out for blood against Urokodaki's disciples, and he will not stop hunting you down. This is not a problem you can solve by elusion. Try again.")
             tanjiroHitPoints = tanjiroHitPoints - 2
+            document.getElementById("heart6").remove()
+            document.getElementById("heart7").remove()
         } else if (event.key === 'Enter' && textInput4Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
         } else if (event.key !== 'Enter') {
@@ -415,8 +479,11 @@ function loadChapter5() {
         + "<li>" + "Leave Nezuko in Urokodaki's care for safety: " + "<font color = 'yellow'>" + "Leave Nezuko behind" + "</font>"
         + "</ol>"
     gameUI.appendChild(chapter5Div)
+    chapter5Div.scrollIntoView()
 
     createTextInput5(gameUI)
+
+    document.getElementById('input4').disabled = true
 }
 
 function createTextInput5(parent) {
@@ -435,6 +502,7 @@ function createTextInput5(parent) {
     let textInput5Field = document.createElement('input')
     textInput5Field.type = 'text'
     textInput5Field.className = 'form-control'
+    textInput5Field.id = 'input5'
     textDiv5.appendChild(textInput5Field)
 
     parent.appendChild(textDiv5)
@@ -454,6 +522,8 @@ function createTextInput5(parent) {
         } else if (event.key === 'Enter' && textInput5Field.value === 'Go back to the boulder') {
             alert("It's touching that you're sentimental, but you should treasure the time you have to rest and prepare for the journey. Afterall, Sabito and Makomo saw you triumph in the Wisteria Forest - you have already brought them peace. Try again.")
             tanjiroHitPoints = tanjiroHitPoints - 2
+            document.getElementById("heart8").remove()
+            document.getElementById("heart9").remove()
         } else if (event.key === 'Enter' && textInput5Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
         } else if (event.key !== 'Enter') {
@@ -490,8 +560,11 @@ function loadChapter6() {
         + "<li>" + "Keep fighitng the demons: " + "<font color = 'yellow'>" + "Keep fighting" + "</font>"
         + "</ol>"
     gameUI.appendChild(chapter6Div)
+    chapter6Div.scrollIntoView()
 
     createTextInput6(gameUI)
+
+    document.getElementById('input5').disabled = true
 }
 
 function createTextInput6(parent) {
@@ -510,6 +583,7 @@ function createTextInput6(parent) {
     let textInput6Field = document.createElement('input')
     textInput6Field.type = 'text'
     textInput6Field.className = 'form-control'
+    textInput6Field.id = 'input6'
     textDiv6.appendChild(textInput6Field)
 
     parent.appendChild(textDiv6)
@@ -529,6 +603,8 @@ function createTextInput6(parent) {
         } else if (event.key === 'Enter' && textInput6Field.value === 'Protect Kazumi') {
             alert("You managed to keep Kazumi safe, well done! But you are still overwhelmed and need to defeat the demons. Try again.")
             tanjiroHitPoints = tanjiroHitPoints - 2
+            document.getElementById("heart0").remove()
+            document.getElementById("heart1").remove()
         } else if (event.key === 'Enter' && textInput6Field.value === '') {
             alert('You need to make a choice. Be brave, young warrior.')
         } else if (event.key !== 'Enter') {
@@ -548,28 +624,61 @@ function createTextInput6(parent) {
 }
 
 function loadChapter7() {
+    let chapter7Div = document.createElement('div')
+    chapter7Div.className = 'chapterDiv'
+    chapter7Div.id = 'chapter7'
+    chapter7Div.innerHTML = 
+        "<h1>" + "第7話: 鬼舞辻 無惨" + "</h1>"
+        + "<p id = 'statusCheckText'>Status Check: You currently have "  + tanjiroHitPoints + " hp.</p>"
+        + "<p>" + "Urokodaki tells Tanjiro there is only one demon still alive who has the special blood needed to turn a human into a demon, and thus was the one who attacked the Kamado household. He is also the only one who may know how to turn Nezuko back into a human. He is over a thousand years old and the progenitor of all demons: Kibutsuji Muzan."
+        + "<p>" + "Tanjiro leaves Nezuko to protect Kazumi and the human girl from one of the three while he jumps inside their black hole to deal with the other two. Inside it is like a black swamp, but his Water Style shows its true power when underwater, letting him create a whirlpool that eviscerates the two. Nezuko physically beats back the remaining demon, who thinks she must have gotten a huge amount of blood from 'him' to be so powerful. However, her lack of experience makes her attacks easy to read and the demon begins to regain the advantage, when Tanjiro surfaces and disables him."
+        + "<p>" + "Tanjiro orders the demon to tell him what he knows about Kibutsuji Muzan but the name terrifies the demon so much he attempts a suicidal attack rather than speak and is killed. Nezuko falls asleep and Tanjiro returns her to the box. Kazumi is in shock and shouts at Tanjiro when he tries to tell him to move on after his fiancée's death, though realizes after Tanjiro gives him Satoko's hairpin, smiling gently, that he's been through something similar and apologizes, promising to take care of the girl. Tanjiro leaves, vowing to defeat Kibutsuji for the suffering he has caused."
+        + "<p>" + "A Kasugai crow lands on his shoulder and directs him to Asakusa, Tokyo for his next mission, but Tanjiro finds Tokyo's size and electricity overwhelming. While resting in a park he catches Kibutsuji's scent and chases it down, leaving Nezuko behind in his hurry. He locates Kibutsuji as he walks down a busy street and is about to draw his sword when Tanjiro realizes he's holding a girl who calls him 'daddy'. A woman walks up and asks what's going on and the girl in Kibutsuji's arms calls her 'mommy'. Tanjiro can smell the girl and woman are human - Kibutsuji is pretending to be one as well."
+        + "<p>" + "To distract Tanjiro, Kibutsuji digs his fingernails into his palm to bloody them and casually slices the neck of a man passing by, turning him into a demon."
+        + "<p>"
+        + "<p>" + "T O  B E  C O N T I N U E D 。。。"
+    gameUI.appendChild(chapter7Div)
+    chapter7Div.scrollIntoView()
 
+    // createTextInput7(gameUI)
+
+    let continueGameBtn = document.createElement('button')
+    continueGameBtn.type = 'button'
+    continueGameBtn.className = 'btn btn-outline-warning'
+    continueGameBtn.innerText = 'つづく'
+    gameUI.appendChild(continueGameBtn)
+
+    continueGameBtn.addEventListener('click', continueGameBtnClick)
+
+    document.getElementById('input6').disabled = true
 }
 
-// TEMPLATES
+function continueGameBtnClick(event) {
+    event.stopPropagation()
+    $(gameUI).hide('slow')
+
+    toBeContinued(mainBody)
+}
+
+// TEMPLATES ----------------------------------------------
 
 // function loadChapter3() {
-//     let chapter3Div = document.createElement('div')
-//     chapter3Div.className = 'chapterDiv'
-//     chapter3Div.id = 'chapter3'
-//     chapter3Div.innerHTML = 
-//         "<h1>" + "第3話: 錆兎と真菰" + "</h1>"
-//         + "<p id = 'statusCheckText'>Status Check: You currently have "  + tanjiroHitPoints + " hp.</p>"
-//         + "<p>" + ""
-//         + "<p>" + "What is your choice?"
-//         + "<ol id='choiceList'>"
-//         + "<li>" + ": " + "<font color = 'yellow'>" + "" + "</font>"
-//         + "<li>" + ": " + "<font color = 'yellow'>" + "" + "</font>"
-//         + "<li>" + ": " + "<font color = 'yellow'>" + "" + "</font>"
-//         + "</ol>"
-//     gameUI.appendChild(chapter3Div)
+    // let chapter3Div = document.createElement('div')
+    // chapter3Div.className = 'chapterDiv'
+    // chapter3Div.id = 'chapter3'
+    // chapter3Div.innerHTML = 
+    //     "<h1>" + "第3話: 錆兎と真菰" + "</h1>"
+    //     + "<p id = 'statusCheckText'>Status Check: You currently have "  + tanjiroHitPoints + " hp.</p>"
+    //     + "<p>" + ""
+    //     + "<p>" + "What is your choice?"
+    //     + "<ol id='choiceList'>"
+    //     + "<li>" + ": " + "<font color = 'yellow'>" + "" + "</font>"
+    //     + "<li>" + ": " + "<font color = 'yellow'>" + "" + "</font>"
+    //     + "<li>" + ": " + "<font color = 'yellow'>" + "" + "</font>"
+    //     + "</ol>"
+    // gameUI.appendChild(chapter3Div)
 
-//     createTextInput3(gameUI)
+    // createTextInput3(gameUI)
 // }
 
 // function createTextInput2(parent) {
@@ -588,6 +697,7 @@ function loadChapter7() {
 //     let textInput2Field = document.createElement('input')
 //     textInput2Field.type = 'text'
 //     textInput2Field.className = 'form-control'
+    // textInput2Field.id = 'input2'
 //     textDiv2.appendChild(textInput2Field)
 
 //     parent.appendChild(textDiv2)

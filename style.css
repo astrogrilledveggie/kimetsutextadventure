@@ -29,9 +29,22 @@ body {
   text-align: center;
 }
 
+#life-bar {
+  margin: 0 auto;
+  width: 70%;
+  max-width: 550px;
+  height: 20px;
+  /* display: none; */
+}
+
+.lifeHeart {
+  max-height: 15px;
+}
+
 #main-body {
   margin: 0 auto;
   width: 70%;
+  max-width: 550px;
   height: 600px;
   outline: 1px solid white;
   background-color: rgba(0, 0, 0, 0.8);
@@ -116,4 +129,20 @@ body {
 
 #choiceList {
   font-size: 13px;
+}
+
+#toBeContinued {
+  margin: 0 auto;
+  padding-top: 50px;
+  font-size: 43px;
+  text-align: center;
+}
+
+#toBeContinued img {
+  max-height: 250px;
+  width: auto;
+}
+
+.modal-fade {
+  display: none;
 }
