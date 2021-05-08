@@ -73,7 +73,7 @@ let createTextInput0 = (parent) => {
     function enterChapter1(event) {
         event.stopPropagation()
         if (event.key === 'Enter' && textInput0Field.value === 'let us proceed') {
-            // alert('Nicely done. You are ready to embark on your text adventure.')
+            alert('Nicely done. You are ready to embark on your text adventure.')
             document.getElementById('prologue').remove()
             document.querySelector('.input-group').remove()
             loadChapter1()
@@ -636,7 +636,7 @@ function loadChapter7() {
         + "<p>" + "A Kasugai crow lands on his shoulder and directs him to Asakusa, Tokyo for his next mission, but Tanjiro finds Tokyo's size and electricity overwhelming. While resting in a park he catches Kibutsuji's scent and chases it down, leaving Nezuko behind in his hurry. He locates Kibutsuji as he walks down a busy street and is about to draw his sword when Tanjiro realizes he's holding a girl who calls him 'daddy'. A woman walks up and asks what's going on and the girl in Kibutsuji's arms calls her 'mommy'. Tanjiro can smell the girl and woman are human - Kibutsuji is pretending to be one as well."
         + "<p>" + "To distract Tanjiro, Kibutsuji digs his fingernails into his palm to bloody them and casually slices the neck of a man passing by, turning him into a demon."
         + "<p>"
-        + "<p>" + "T O  B E  C O N T I N U E D 。。。"
+        + "<p>" + "TO  BE  CONTINUED 。。。"
     gameUI.appendChild(chapter7Div)
     chapter7Div.scrollIntoView()
 
